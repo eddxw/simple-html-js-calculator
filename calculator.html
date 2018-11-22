@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script>
+    const insert = num =>{
+      document.form.textview.value+= num;
+    }
+    const clean = function(){
+      document.form.textview.value="";
+    }
+    function equal(){
+      let str = document.form.textview.value;
+      str = str.replace(/x/g,'*');
+      str = str.replace(/÷/g,'/');
+      
+      let result = eval(str);
+      document.form.textview.value = eval(result);
+      
+      const expresion = `${str}=${result}`;
+      console.log(expresion);
+      document.getElementById("expresion").textContent = expresion;
+    }
+    //.addEventListener
+    
+  </script>
+  <style>
+    *{
+       margin: 0px;
+       padding: 0px;
+    }
+    .button{
+      width: 50px;
+      height: 50px; 
+      font-size: 25px;
+      margin: 2px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      background: repeating-radial-gradient(rgb(5,51,109), rgb(7,33, 51) );;
+    }
+    .textview{
+      font-size: 25px;
+      padding: 5px;
+      margin: 5px;
+      width: 203px;
+      text-align: right;
+      border: none;
+    }
+    .main{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%)translateY(-50%);
+      
+    }
+    .bg{
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to right, rgb(5,51,109) , rgb(46,137, 204) );
+    }
+    .expresion{
+      color: rgb(171,178,188);
+      font-size: 13px;
+      width: 100%;
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+<div class="main">
+  <span id="expresion" class="expresion">(5x9/3)</span>
+<form name="form">
+  <input name="textview" class="textview">
+</form>
+<table>
+  <tr>
+<td><input class="button" type="button" value="(" onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=")" onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="%" onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="AC" onclick="clean()"></td>
+</tr>
+<tr>
+<td><input class="button" type="button" value=7 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=8 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=9 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="÷" onclick="insert(this.value)"></td>
+</tr>
+<tr>
+<td><input class="button" type="button" value=4 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=5 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=6 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="x" onclick="insert(this.value)"></td>
+</tr>
+<tr>
+<td><input class="button" type="button" value=1 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=2 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value=3 onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="-" onclick="insert(this.value)"></td>
+</tr>
+<tr>
+<td><input class="button" type="button" value=0 onclick="insert(this.value)"></td>
+<td><input class="button"  type="button" value="." onclick="insert(this.value)"></td>
+<td><input class="button" type="button" value="=" onclick="equal()"></td>
+<td><input class="button" type="button" value="+" onclick="insert(this.value)"></td>
+</tr>
+</table>
+</div>
+</body>
+</html>
