@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width">
   <title>JS Bin</title>
   <script>
+    document.ans = 0;
     const insert = num =>{
       document.form.textview.value+= num;
     }
@@ -17,13 +18,35 @@
       str = str.replace(/÷/g,'/');
       
       let result = eval(str);
-      document.form.textview.value = eval(result);
-      
+      document.form.textview.value = result;
+      document.ans = result;
+
       const expresion = `${str}=${result}`;
-      console.log(expresion);
       document.getElementById("expresion").textContent = expresion;
     }
-    //.addEventListener
+    document.addEventListener("keydown", (event) => {
+      const keyName = event.key;
+      var reg = /^[\d-+*/()%]+$/;
+
+      console.log(`Key: ${keyName}`);
+      if (keyName == 'Enter' || keyName == '=') {
+        equal();
+      }
+      else if (reg.test(keyName))
+      {
+        insert(keyName);
+      }
+      else if (keyName == 'Backspace') {
+        let val = document.form.textview.value;
+        document.form.textview.value = val.slice(0, -1);
+      }
+      else if (keyName == '.'){
+        let val = document.form.textview.value;
+        if (val.charAt(val.length-1) != '.')
+          insert(keyName);
+      }
+
+    });
     
   </script>
   <style>
@@ -65,16 +88,15 @@
       color: rgb(171,178,188);
       font-size: 13px;
       width: 100%;
-      
     }
   </style>
 </head>
 <body>
   <div class="bg"></div>
 <div class="main">
-  <span id="expresion" class="expresion">(5x9/3)</span>
+  <span id="expresion" class="expresion"></span>
 <form name="form">
-  <input name="textview" class="textview">
+  <input id="textview" name="textview" class="textview">
 </form>
 <table>
   <tr>
